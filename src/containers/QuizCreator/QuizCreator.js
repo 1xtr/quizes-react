@@ -5,6 +5,7 @@ import {createControl, validate, validateForm} from '../../form/formFramework'
 import Input from '../../components/UI/Input/Input'
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary'
 import Select from '../../components/UI/Select/Select'
+import axios from 'axios'
 
 function createOptionControl(number) {
     return createControl({
@@ -69,10 +70,29 @@ class QuizCreator extends Component {
         })
     }
 
-    createQuizHandler = event => {
+    createQuizHandler =  async event => {
         event.preventDefault()
-        console.log(this.state.quiz)
-        //TODO: server
+        const url = 'https://xtr-minin-react-quiz-default-rtdb.europe-west1.firebasedatabase.app/quizes.json'
+
+        try {
+            await axios.post(url,this.state.quiz)
+            this.setState({
+                quiz: [],
+                isFormValid: false,
+                rightAnswerId: 1,
+                formControls: createFormControls()
+            })
+        } catch (e) {
+            console.log(e)
+        }
+
+        // axios.post(url, this.state.quiz)
+        //     .then(resp => {
+        //         console.log(resp)
+        //     })
+        //     .catch(e=>{
+        //         console.log(e)
+        //     })
     }
 
     changeHandler = (value, controlName) => {
