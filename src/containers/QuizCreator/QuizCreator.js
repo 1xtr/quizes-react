@@ -5,7 +5,7 @@ import {createControl, validate, validateForm} from '../../form/formFramework'
 import Input from '../../components/UI/Input/Input'
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary'
 import Select from '../../components/UI/Select/Select'
-import axios from 'axios'
+import axios from '../../axios/axios-quiz'
 
 function createOptionControl(number) {
     return createControl({
@@ -53,10 +53,10 @@ class QuizCreator extends Component {
             id: index,
             rightAnswerId: this.state.rightAnswerId,
             answers: [
-                { text: option1.value, id: option1.id },
-                { text: option2.value, id: option2.id },
-                { text: option3.value, id: option3.id },
-                { text: option4.value, id: option4.id },
+                {text: option1.value, id: option1.id},
+                {text: option2.value, id: option2.id},
+                {text: option3.value, id: option3.id},
+                {text: option4.value, id: option4.id},
             ]
         }
 
@@ -70,12 +70,11 @@ class QuizCreator extends Component {
         })
     }
 
-    createQuizHandler =  async event => {
+    createQuizHandler = async event => {
         event.preventDefault()
-        const url = 'https://xtr-minin-react-quiz-default-rtdb.europe-west1.firebasedatabase.app/quizes.json'
 
         try {
-            await axios.post(url,this.state.quiz)
+            await axios.post('/quizes.json', this.state.quiz)
             this.setState({
                 quiz: [],
                 isFormValid: false,
@@ -85,14 +84,6 @@ class QuizCreator extends Component {
         } catch (e) {
             console.log(e)
         }
-
-        // axios.post(url, this.state.quiz)
-        //     .then(resp => {
-        //         console.log(resp)
-        //     })
-        //     .catch(e=>{
-        //         console.log(e)
-        //     })
     }
 
     changeHandler = (value, controlName) => {
@@ -138,7 +129,6 @@ class QuizCreator extends Component {
             rightAnswerId: +event.target.value
         })
     }
-
 
     render() {
         const select = <Select
