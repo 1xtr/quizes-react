@@ -3,6 +3,7 @@ import classes from './Auth.module.sass'
 import Button from '../../components/UI/Button/Button'
 import Input from '../../components/UI/Input/Input'
 import axios from '../../axios/axios-quiz'
+import {connect} from 'react-redux'
 
 function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -155,4 +156,14 @@ class Auth extends Component {
     }
 }
 
-export default Auth
+function mapStateToProps(state) {
+    return {
+
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth)

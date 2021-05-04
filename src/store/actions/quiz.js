@@ -89,7 +89,6 @@ export function quizNextQuestion(number) {
 export function quizAnswerClick(answerId) {
     return (dispatch, getState) => {
         const state = getState().quiz
-        console.log(state)
         if (state.answerState) {
             const key = Object.keys(state.answerState)[0]
             if (state.answerState[key] === 'success') {
@@ -124,14 +123,12 @@ export function quizAnswerClick(answerId) {
     }
 }
 
-function isQuizFinished(state) {
-    return state.activeQuestion + 1 === state.quiz.length
-}
-
 export function retryQuiz() {
     return {
         type: QUIZ_RETRY
     }
 }
 
-
+function isQuizFinished(state) {
+    return state.activeQuestion + 1 === state.quiz.length
+}
